@@ -39,6 +39,7 @@ public class StartupRunner implements CommandLineRunner {
             System.out.println("2: Find by model");
             System.out.println("3: Find under a certain price");
             System.out.println("4: Find by release year");
+            System.out.println("5: Find by max price and min release year");
             System.out.println("0: Quit");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -47,8 +48,21 @@ public class StartupRunner implements CommandLineRunner {
                 case 2 -> findByModel();
                 case 3 -> findByPrice();
                 case 4 -> findByYear();
+                case 5 -> findByPriceAndYear();
                 case 0 -> istrue = false;
             }
+        }
+    }
+
+    private void findByPriceAndYear() {
+        System.out.println("Enter max price for your sneaker");
+        int maxPrice = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter min year for your sneaker");
+        int minYear = scanner.nextInt();
+        List<Sneaker> sneakers = sneakerRepository.search(maxPrice, minYear);
+        for (Sneaker sneaker : sneakers) {
+            System.out.println(sneaker);
         }
     }
 
